@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="stylesLog.css">
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.7/dist/inputmask.min.js"></script>
+</head>
+<body>
+    <form id="registerForm">
+        <div class="main">
+            <div class="main-login">
+                <div class="back-blur">
+                    <div class="header">
+                        <h2>Registration</h2>
+                    </div>
+    
+                    <div>
+                        <div class="cont-input">
+                            <label>Full Name</label>
+                            <input type="text" id="snp" placeholder="Ivanov Ivan Ivanovich" required>
+                        </div>
+                        
+                        <div class="cont-input">
+                            <label>Phone Number</label>
+                            <input type="text" id="phone" placeholder="89991234567" required>
+                        </div>
+                        
+                        <div class="cont-input">
+                            <label>Passport</label>
+                            <input type="text" id="passport" placeholder="1234 567890" required>
+                        </div>
+                        
+                        <div class="cont-input">
+                            <label>Login (English only)</label>
+                            <input type="text" id="login" placeholder="username" required>
+                        </div>
+                        
+                        <div class="cont-input">
+                            <label>Password (English only)</label>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+        
+                        <div class="but-sign">
+                            <button class="sign-in">Register</button>
+                        </div>
+                        
+                        <div class="error-container">
+                            <p id="error" class="error-message"></p>
+                        </div>
+                        
+                        <div class="login-link">
+                            <a href="/login">Already have an account? Sign in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация масок
+            Inputmask("8[9999999999]").mask(document.getElementById('phone'));
+            Inputmask("9999 999999").mask(document.getElementById('passport'));
+            
+            // Валидация логина (только английские символы и цифры)
+            document.getElementById('login').addEventListener('input', function() {
+                this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+            });
+            
+            // Валидация пароля (только английские символы и цифры)
+            document.getElementById('password').addEventListener('input', function() {
+                this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+            });
+        });
+
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const errorElement = document.getElementById("error");
+            errorElement.innerText = "";
+            
+            const formData = {
+                snp: document.getElementById("snp").value.trim(),
+                phone: document.getElementById("phone").value.trim(),
+                passport: document.getElementById("passport").value.trim(),
+                login: document.getElementById("login").value.trim(),
+                password: document.getElementById("password").value.trim()
+            };
+            
+            // Basic validation
+            for (const [key, value] of Object.entries(formData)) {
+                if (!value) {
+                    errorElement.innerText = "All fields are required";
+                    return;
+                }
+            }
+            
+            // Phone validation
+            if (!/^8\d{10}$/.test(formData.phone)) {
+                errorElement.innerText = "Phone must be in format 89991234567";
+                return;
+            }
+            
+            // Passport validation
+            if (!/^\d{4} \d{6}$/.test(formData.passport)) {
+                errorElement.innerText = "Passport must be in format 1234 567890";
+                return;
+            }
+            
+            // Login validation
+            if (!/^[a-zA-Z0-9]+$/.test(formData.login)) {
+                errorElement.innerText = "Login must contain only English letters and numbers";
+                return;
+            }
+            
+            // Password validation
+            if (!/^[a-zA-Z0-9]+$/.test(formData.password)) {
+                errorElement.innerText = "Password must contain only English letters and numbers";
+                return;
+            }
+            
+            try {
+                const response = await fetch("/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert("Registration successful! Please login.");
+                    window.location.href = "/login";
+                } else {
+                    errorElement.innerText = result.error || "Registration failed";
+                }
+            } catch (error) {
+                console.error("Registration error:", error);
+                errorElement.innerText = "Connection error";
+            }
+        });
+    </script>
+</body>
+</html>

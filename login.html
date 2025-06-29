@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="stylesLog.css">
+</head>
+<body>
+    <form id="loginForm">
+        <div class="main">
+            <div class="main-login">
+                <div class="back-blur">
+                    <div class="header">
+                        <h2>Welcome!</h2>
+                    </div>
+    
+                    <div>
+                        <div>
+                            <h2>Login</h2>
+                        </div>
+                        <div class="cont-input">
+                            <label for="">Username</label>
+                            <input type="text" id="login" placeholder="username" required>
+                        </div>
+        
+                        <div class="cont-input">
+                            <label for="">Password</label>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+        
+                        <div class="but-sign">
+                            <button class="sign-in">Sign in</button>
+                        </div>
+
+                        <div class="register-link">
+                            <a href="/register">Don't have an account? Register</a>
+                        </div>
+                        
+                        <!-- Переносим сообщение об ошибке сюда -->
+                        <div class="error-container">
+                            <p id="error" class="error-message"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const login = document.getElementById("login").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorElement = document.getElementById("error");
+            
+            // Сброс предыдущей ошибки
+            errorElement.innerText = "";
+            
+            // Проверка пустых полей
+            if (!login || !password) {
+                errorElement.innerText = "Логин и пароль обязательны";
+                return;
+            }
+            
+            try {
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ login, password })
+                });
+                
+                if (!response.ok) {
+                    throw new Error("Ошибка сервера");
+                }
+                
+                const result = await response.json();
+                if (result.success) {
+                    localStorage.setItem("userRole", result.role);
+                    localStorage.setItem("userType", result.role);
+                    localStorage.setItem('userName', result.userName);
+                    window.location.href = "/";
+                } else {
+                    errorElement.innerText = "Неверный логин или пароль";
+                }
+            } catch (error) {
+                console.error("Ошибка входа:", error);
+                errorElement.innerText = "Неверный логин или пароль";
+            }
+        });
+    </script>
+</body>
+</html>

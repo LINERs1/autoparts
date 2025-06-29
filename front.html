@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Base</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main>
+
+        <aside class="aside" id="aside">
+            <div>
+                <div class="profile">
+                    <img src="img/profile.png" alt="profile" class="profile_img">
+                    <div class="welcome">
+                        <p>Welcome back,</p>
+                        <p class="name" id="userNameDisplay"></p>
+                        <p class="role" id="userRoleDisplay" style="font-size: 12px; color: #888;"></p>
+
+                    </div>
+                    <button onclick="logout()" class="logout-button"><img style="width: 15px;" src="img/logout.png" alt="logout" class="logout_img"></button>
+
+                    <button class="settings" id='butt_settings'><img src="img/close.png" alt="settings" class="settings_img" ></button>
+                </div>
+            </div>
+
+            <div>
+                <div class="butt_table">
+                    <button class="switch_table" id="ORDERPARTS"><img src="./img/orderparts.png" class="img_switchtable"><span>Order parts</span></button>
+                    <button class="switch_table" id="CLIENT"><img src="./img/client.png" class="img_switchtable"><span>Client</span></button>
+                    <button class="switch_table" id="CONFIG"><img src="./img/config.png" class="img_switchtable"><span>Configuration</span></button>
+                    <button class="switch_table" id="MANAGER"><img src="./img/man.png" class="img_switchtable"><span>Manager</span></button>
+                    <button class="switch_table" id="MODEL"><img src="./img/model.png" class="img_switchtable"><span>Model</span></button>
+                    <button class="switch_table" id="ORDERING"><img src="./img/ordering.png" class="img_switchtable"><span>Ordering</span></button>
+                    <button class="switch_table" id="PART"><img src="./img/part.png" class="img_switchtable"><span>Part</span></button>
+                    <button class="switch_table" id="RELATE"><img src="./img/relate.png" class="img_switchtable"><span>Relate</span></button>
+                    <button class="switch_table" id="REQUEST"><img src="./img/request.png" class="img_switchtable"><span>Request</span></button>
+                    <button class="switch_table" id="SUPPLIER"><img src="./img/supplier.png" class="img_switchtable"><span>Supplier</span></button>
+                    <button class="switch_table" id="REPORT"><img src="./img/supplier.png" class="img_switchtable"><span>Report</span></button>
+                    <button class="switch_table" id="CREATE_ORDER">
+                        <img src="./img/add_order.png" class="img_switchtable">
+                        <span>Create Order</span>
+                    </button>
+                    <button class="switch_table" id="MY_ORDERS">
+                        <img src="./img/orders.png" class="img_switchtable">
+                        <span>My Orders</span>
+                    </button>
+
+                    <button class="switch_table" id="CLIENT_ORDERS_MANAGER">
+                        <img src="./img/orders.png" class="img_switchtable">
+                        <span>Client Orders</span>
+                    </button>
+
+
+
+
+
+                </div>
+            </div>
+        </aside>
+        <button id="showSidebar" style="display: none;" class="sidebar-return">Touch me</button>
+
+
+
+        <div class="bar_main" id="bar_main">
+            <div class="bar">
+                <div class="bar1">
+                    <button class="settings1" id='butt_settings1'><img src="img/settings.png" alt="settings" class="settings_img"></button>
+                    <!-- <p class="name_table"><b>Data Table</b></p> -->
+                </div>
+    
+                <div class="right_bar">
+                    <div class="search0">
+                        <img src="img/search.png" class="search_img">
+                        <input type="search" placeholder="Search" class="search" id="searchInput">
+                    </div>
+    
+                    <!-- <button class="database_entry" id="AddRow"><p>Add row</p></button> -->
+                    
+                    <!-- <button class="pen"><img src="img/pen.png" alt="pen" class="pen_img"></button> -->
+    
+                </div>
+            </div>
+    
+            <div class="info">
+                <div>
+                    <p class="name_table1" style="font-size: 24px;" id="NameTable">Name table</p>
+                    <p class="result_quantity" id="recordCount">Results quantity: 0</p>
+                </div>
+
+                <div class="butts" id="sortContainer">
+                    <button class="butt_sort" id="sortChronological">
+                        <img src="./img/sort.png" alt="sort" class="sort_img">
+                        <p class="sort_name">Sort: Chronological</p>
+                    </button>
+
+                    <div class="butt_sort_time">
+                        <button class="side"><img src="./img/left.png" alt="left" class="sort_img"></button>
+                        <p class="sort_name">August, 2021</p>
+                        <button class="side"><img src="./img/right.png" alt="right" class="sort_img"></button>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="main_statistics" id="statistics">
+                <div class="statistics">
+                    <div class="res">
+                        <p class="name_statistics">Total Budget</p>
+                        <p class="res_statistics"><b>85,125.00</b></p>
+                    </div>
+                    
+                </div>
+
+                <div class="statistics">
+                    <div class="res">
+                        <p class="name_statistics">Total Budget</p>
+                        <p class="res_statistics"><b>85,125.00</b></p>
+                    </div>
+                </div>
+
+                <div class="statistics">
+                    <div class="res">
+                        <p class="name_statistics">Total Budget</p>
+                        <p class="res_statistics"><b>85,125.00</b></p>
+                    </div>
+                </div>
+
+                <div class="statistics">
+                    <div class="res">
+                        <p class="name_statistics">Total Budget</p>
+                        <p class="res_statistics"><b>85,125.00</b></p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="dis_tab">
+
+                <table id="dataTable" class="display_table">
+                    
+                    <!-- <button class="database_entry" style="margin-left: 3.8%;  height: 20px; font-size: 10px;">Add row</button> -->
+                        <thead class="display_thead" >
+                            <div style="display: flex;">
+                                <button id="selectAllButton" class="database_entry" style=" display:none;width: 20px; height: 20px; margin-left: 3.8%;margin-bottom: 10px; font-size: 10px;border-radius: 4px; background-color: #2264E5;">All</button>
+                            </div>
+                        </thead>
+                    
+                    
+                    <tbody class="display_tbody"></tbody>
+                </table>
+            </div>
+            <div id="paginationControls" class="pagination-controls"></div>
+
+            <div id="orderCreationArea" style="display: none; padding: 20px;"></div>
+
+        </div>
+        
+    </main>
+
+
+    <div class="out" id="outMain" style="display: none;"> 
+        <div class="out_display" id="out">
+            <div class="header_display" style="display: flex; justify-content: space-between; align-items: center;">
+                <p class="main_text" id="modalTitle">Edit table</p>
+                <button id="closeModalBtn" class="close-btn">
+                    <img src="img/close.png" alt="Close" class="close-icon">
+                </button>
+
+            </div>
+
+    
+
+            <div class="main_input">
+                <div class="form_display">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.7/dist/inputmask.min.js"></script>
+
+    <script src="script.js"></script>
+
+
+    <div id="reportResult" style="margin-top: 30px;"></div>
+    <div class="out" id="reportModal" style="display: none;">
+        <div class="out_display" style="max-width: 800px;">
+            <div class="header_display" style="display: flex; justify-content: space-between; align-items: center;">
+                <p class="main_text">Отчёты</p>
+                <button id="closeReportModal" class="close-btn">
+                    <img src="img/close.png" alt="Close" class="close-icon">
+                </button>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <label for="reportType">Выберите отчёт:</label>
+                <select id="reportType" style="padding: 8px; border-radius: 6px; width: 100%; margin-top: 10px;">
+                    <option value="">-- выбрать --</option>
+                    <option value="manager_sales">📈 Продажи по менеджерам</option>
+                    <option value="popular_parts">🔧 Популярные запчасти</option>
+                    <option value="client_orders">👤 Заказы клиентов</option>
+                </select>
+            </div>
+
+
+            <div id="downloadPDFWrapper" style="display: none; margin-top: 20px;">
+                <button id="downloadPDF" style="
+                    background-color: #2264E5;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-weight: bold;
+                ">Скачать PDF</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
